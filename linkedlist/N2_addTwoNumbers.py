@@ -12,11 +12,6 @@ from typing import Optional
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         # 相加然后进位
-        if l1.val == 0:
-            return l2
-        if l2.val == 0:
-            return l1
-        
         dummy = ListNode()
         cur = dummy
         carry = 0 # 进位
@@ -34,3 +29,13 @@ class Solution:
             l2 = l2.next if l2 else None
         
         return dummy.next
+
+test = Solution()
+l1 = ListNode(0, ListNode(8, ListNode(8)))
+l2 = ListNode(6, ListNode(7, ListNode(8)))
+res = test.addTwoNumbers(l1, l2)
+num = 0
+while res:
+    num = num * 10 + res.val
+    res = res.next
+print(num)
