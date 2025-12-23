@@ -140,14 +140,14 @@ Located in [hot100/twopointers/](hot100/twopointers/)
 
 ## Additional Problem Sets
 
-### Group A - Easy
+### Group A
 - [单词接龙](Group-A-Esay/单词接龙.py)
 - [增强的ststr](Group-A-Esay/增强的ststr.py)
 - [流浪地球](Group-A-Esay/流浪地球.py)
 - [流量波峰](Group-A-Esay/流量波峰.py)
 - [租车骑绿岛](Group-A-Esay/租车骑绿岛.py)
 
-### Group C - Advanced
+### Group C
 - [两个字符串间的最短路径问题](Group-C/两个字符串间的最短路径问题.py)
 - [优雅子数组](Group-C/优雅子数组.py)
 - [叠积木](Group-C/叠积木.py)
