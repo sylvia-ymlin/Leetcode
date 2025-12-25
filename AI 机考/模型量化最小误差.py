@@ -32,7 +32,7 @@ for i in range(N):
     for k, Q_k in enumerate(quantization_bits):
         error = 0
         for w in weights[i]:
-            W_q = int(w * (1 << Q_k))
+            W_q = int(w * (1 << Q_k)) # 根据题目要求，直接 int
             error += abs(w - W_q / (1 << Q_k))
         errors[i][k] = error
 
@@ -43,6 +43,6 @@ for i in range(1, N + 1):
             if j >= Q_k:
                 dp[i][j] = min(dp[i][j], dp[i - 1][j - Q_k] + errors[i - 1][k])
 
-# 输出最小误差（x 100 后取整）
-print(int(dp[N][Q_max] * 100))
-
+# 输出最小误差（x 100 后取整，这里根据样例应该是截断）
+# 最小误差应该是 dp[N][0..Q_max] 中的最小值
+print(int(min(dp[N]) * 100))
