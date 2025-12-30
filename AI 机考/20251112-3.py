@@ -126,7 +126,7 @@ root = build_tree(X, y, list(range(M)), 5)
 def predict(sample, node):
     if node.is_leaf:
         return node.label
-    if sample[node.feature_index] <= node.threshold:
+    if sample[node.feature_index] < node.threshold:
         return predict(sample, node.left)
     else:
         return predict(sample, node.right)
