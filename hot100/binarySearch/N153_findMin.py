@@ -1,20 +1,20 @@
 from ast import List
 
-# 寻找旋转排序数组中的最小值
+# Find minimum in rotated sorted array
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        # 旋转数组查找，最小值在旋转点，无重复元素
+        # Rotated array search, minimum is at rotation point, no duplicate elements
 
         left, right = 0, len(nums) - 1
 
         while left < right:
             mid = (left + right) // 2
 
-            # 找有序子数组
-            if nums[mid] > nums[right]: # 左边有序，最小值在右边
-                left = mid + 1 # mid 不可能指向最小
+            # Find sorted subarray
+            if nums[mid] > nums[right]: # Left side sorted, minimum is on right side
+                left = mid + 1 # mid cannot be minimum
             else: # nums[mid] <= nums[right]
-                right = mid # mid 可能是最小值
+                right = mid # mid could be minimum
         
-        # 二分查找结束，left == right, 指向最小值
-        return nums[left]  # left == right 时，指向最小值
+        # Binary search ends, left == right, pointing to minimum
+        return nums[left]  # When left == right, points to minimum

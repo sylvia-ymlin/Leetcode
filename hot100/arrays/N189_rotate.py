@@ -1,4 +1,4 @@
-# 数组元素向右轮转k个位置，移出的元素放到数组头部
+# Rotate array elements to the right by k positions, move the elements out to the head of the array
 # in place
 
 class Solution:
@@ -6,7 +6,7 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        k = k % len(nums)  # 处理k大于数组长度的情况
+        k = k % len(nums)  # Handle k greater than array length
 
         # the idea is inverse the array three times
         def reverse(start: int, end: int) -> None:

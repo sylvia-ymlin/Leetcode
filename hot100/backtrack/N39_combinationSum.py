@@ -1,29 +1,29 @@
-# 无重复数组，选择元素满足条件，需要判断是否是可行解
+# Non-duplicate array, select elements to satisfy condition, check if it's a feasible solution
 
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         
         def backtrack(start=0, path=[], total=0):
-            # 选择加入了当前节点，得到一个可行解
+            # If selected current node and get a feasible solution
             if total == target:
                 res.append(path[:])
                 print(res)
                 return
             
-            # 非可行解，跳过
+            # Not a feasible solution, skip
             if total > target:
                 return
             
-            # 遍历到最后一个数字， 递归结束
+            # Iterate to last number, recursion ends
             for i in range(start, len(candidates)):
-                # 做选择，取 candidates[i]
+                # Make choice, pick candidates[i]
                 path.append(candidates[i])
                 total += candidates[i]
 
-                # 递归，处理下一个数字
+                # Recursion, process next number
                 backtrack(i, path, total)
 
-                # 撤销选择，不取 candidates[i]
+                # Undo choice, don't pick candidates[i]
                 path.pop()
                 total -= candidates[i]
 

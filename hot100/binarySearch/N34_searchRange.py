@@ -1,5 +1,5 @@
-# 存在相等元素，前后探查，返回下标范围
-from typing improt list
+# Duplicate elements exist, probe forward and backward, return index range
+from typing import List
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         left, right = 0, len(nums)-1
@@ -31,12 +31,12 @@ class Solution:
         
         return [left, right]
 
-# 时间复杂度 O(N), 考虑最坏的请求，所有元素都等于目标值，最后需要两次遍历整个数组
+# Time complexity O(N), consider worst case where all elements equal target, finally need to traverse entire array twice
 
-# 优化：
-# 查找 最左边等于 target 的
-# 查找 最右边等于 target 的
-# 两次 二分查找， 时间复杂度 O(logN)
+# Optimization:
+# Find leftmost equal to target
+# Find rightmost equal to target
+# Two binary searches, time complexity O(logN)
 
 class Solution2:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
@@ -49,12 +49,12 @@ class Solution2:
             elif nums[mid] > target:
                 right = mid - 1
             else:
-                # 记录
+                # Record
                 leftIdx = mid
-                # 继续向左
+                # Continue left
                 right = mid - 1
         
-        if leftIdx == -1: # 没有目标值
+        if leftIdx == -1: # No target value
             return [-1, -1]
         
         left, right = 0, len(nums) - 1
@@ -66,9 +66,9 @@ class Solution2:
             elif nums[mid] > target:
                 right = mid - 1
             else:
-                # 记录
+                # Record
                 rightIdx = mid
-                # 继续向右
+                # Continue right
                 left = mid + 1
         
         return [leftIdx, rightIdx]

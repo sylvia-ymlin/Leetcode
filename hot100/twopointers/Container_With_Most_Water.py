@@ -1,4 +1,4 @@
-# the volumn of a container is determined by the shorter line
+# the volume of a container is determined by the shorter line
 # so we can use two pointers
 class Solution:
     def maxArea(self, height: List[int]) -> int:

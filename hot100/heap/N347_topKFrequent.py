@@ -3,10 +3,10 @@ import collections
 import random
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # 输出顺序不重要
-        # 前 k 个高频元素，需要统计元素出现次数
+        # Output order doesn't matter
+        # Top k frequent elements, need to count element occurrences
         count = collections.Counter(nums)
-        num_cnt = list(count.items()) # (term, count), 要按照 count 排序
+        num_cnt = list(count.items()) # (term, count), need to sort by count
         n = len(num_cnt)
         topKs = self.findTopK(num_cnt, n-k)
         return [item[0] for item in topKs]

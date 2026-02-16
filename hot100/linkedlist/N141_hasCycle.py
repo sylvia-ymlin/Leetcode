@@ -8,13 +8,13 @@ class ListNode:
 from typing import Optional
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        # 快慢指针法, 如果有环，快慢指针终会相遇，且无 none
+        # Fast and slow pointers method. If there is a cycle, fast and slow pointers will eventually meet, and no none
         slow = fast = head
         while fast and fast.next:
-            slow = slow.next  # 慢指针每次走一步
-            fast = fast.next.next  # 快指针每次走两步
-            if slow == fast:  # 相遇，说明有环
+            slow = slow.next  # Slow pointer moves one step at a time
+            fast = fast.next.next  # Fast pointer moves two steps at a time
+            if slow == fast:  # Meet, meaning there is a cycle
                 return True
-        # 没有环，遇到 None, 退出循环
+        # No cycle, encountered None, exit loop
         return False
         

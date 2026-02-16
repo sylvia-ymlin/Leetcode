@@ -1,6 +1,6 @@
-# 返回数组除自身外所有元素乘积
-# 有 0 为 0
-# 要求不能使用除法，且时间复杂度 O(N)
+# Return product of all elements except self
+# 0 is 0
+# No division allowed, time complexity O(N)
 
 from typing import List
 class Solution:

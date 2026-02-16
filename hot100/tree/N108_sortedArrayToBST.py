@@ -1,4 +1,4 @@
-# 有序数组转变为平衡二叉搜索树
+# Convert sorted array to balanced binary search tree
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -8,16 +8,16 @@ class TreeNode:
 from typing import List, Optional
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-        # 最简单：二分递归，保证平衡
-        # 空数组，return
+        # Simplest: Binary recursion, guarantees balance
+        # Empty array, return
         if not nums:
             return None
 
-        # 中间节点作为根节点
+        # Middle node as root node
         mid = len(nums) // 2
         root = TreeNode(nums[mid])
 
-        # 左右子树递归
-        root.left = self.sortedArrayToBST(nums[:mid])  # 左半部分
+        # Left and right subtree recursion
+        root.left = self.sortedArrayToBST(nums[:mid])  # Left part
         root.right = self.sortedArrayToBST(nums[mid + 1:])
         return root

@@ -1,4 +1,4 @@
-# 删除链表倒数第 N 个结点 
+# Remove the Nth node from the end of the list
 
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -8,8 +8,8 @@ class ListNode:
 from typing import Optional
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        # 快慢指针，快指针先行 n 步
-        # 快指针指向最后一个结点时，慢指针指向要删除结点的前一个
+        # Fast and slow pointers, fast pointer goes n steps first
+        # When fast pointer points to the last node, slow pointer points to the previous node of the node to be deleted
         dummy = ListNode(0, head)
         slow, fast = dummy, dummy
         for _ in range(n):
@@ -19,11 +19,11 @@ class Solution:
             slow = slow.next
             fast = fast.next
         
-        if slow == dummy: # 删除头结点
+        if slow == dummy: # Delete head node
             head = head.next
         else:
             slow.next = slow.next.next
         
         return head
 
-# 注意添加头节点和处理逻辑
+# Note adding head node and handling logic

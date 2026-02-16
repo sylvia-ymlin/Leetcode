@@ -1,15 +1,15 @@
-# 时间复杂度 O(n), 空间复杂度 O(1)
-# 不额外构造集合，没有嵌套循环
+# Time complexity O(n), Space complexity O(1)
+# Do not construct extra set, no nested loops
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        # 选择一个候选众数 x，count 个数
-        # 遍历链表，遇到 x，count +1，遇到其他数，count -1
-        # 如果 count = 0，选择下一个数作为候选众数
-        # 输出遍历完后所维护的候选众数，就是数列的众数
+        # Choose a candidate majority element x, count its occurrences
+        # Traverse list, if encounter x, count +1, if another number, count -1
+        # If count = 0, choose next number as candidate majority element
+        # Output candidate majority element maintained after traversal, is the majority element of the sequence
 
-        # 正确性：我们每一次 +1 -1 都消除了数列中两个不同的数，count 的意思代表当前遍历完的数列中，候选数个数和其他所有数的差值
-        # 当 count == 0， 前面所有数抵消，开启一个新序列
+        # Correctness: Each +1 -1 cancels out two different numbers in the sequence, count represents the difference between the candidate number count and all other numbers in the currently traversed sequence
+        # When count == 0, all previous numbers cancel out, start a new sequence
 
         res = 0
         count = 0
@@ -24,7 +24,7 @@ class Solution:
         
         return res
 
-# 但是其实排序的时间复杂度更低，众数是中位数
+# However, sorting time complexity is lower, majority element is the median
 class Solution2:
     def majorityElement(self, nums: List[int]) -> int:
         nums.sort()

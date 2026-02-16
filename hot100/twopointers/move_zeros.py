@@ -5,7 +5,7 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        # the easisest way is move all non-zero elements to the front, and then fill the rest with zeros
+        # the easiest way is move all non-zero elements to the front, and then fill the rest with zeros
         index_non_zero = 0  # index to place the next non-zero element
         for i in range(len(nums)):
             if nums[i] != 0:

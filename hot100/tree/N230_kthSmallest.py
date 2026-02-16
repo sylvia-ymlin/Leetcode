@@ -1,4 +1,4 @@
-# 二叉搜索树中第k小元素：中序遍历 -> 升序 -> 第 k 个元素
+# Kth smallest element in BST: Inorder traversal -> Ascending order -> Kth element
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -8,7 +8,7 @@ class TreeNode:
 from typing import Optional
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        # 要在所有递归栈中共享变量，需要用类属性或实例属性
+        # To share variables across all recursion stacks, need to use class attributes or instance attributes
         self.count = 0
         self.result = -1
 

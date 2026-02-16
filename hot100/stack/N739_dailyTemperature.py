@@ -1,21 +1,21 @@
-# 根据每日天气信息，输出下一个更高温度的天气出现在几天后
-# 如果没有更高温度的天气，输出0
+# Given daily weather information, output how many days until the next higher temperature
+# If no higher temperature, output 0
 
 from typing import List
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         n = len(temperatures)
         res = [0] * n
-        stack = [] # 栈存储没有找到更高温度的索引
+        stack = [] # Stack stores indices of temperatures for which no higher temperature has been found yet
         for i, temp in enumerate(temperatures):
-            # 如果当前温度大于栈顶元素对应的温度
+            # If current temperature is greater than temperature corresponding to stack top element
             print(stack)
             while stack and temp > temperatures[stack[-1]]:
                 if temp > temperatures[stack[-1]]:
                     res[stack[-1]] = i - stack[-1]
                     stack.pop()
             
-            # 当前元素入栈
+            # Push current element onto stack
             stack.append(i)
 
         return res
@@ -24,5 +24,5 @@ class Solution:
 test = Solution()
 print(test.dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]))
 
-# 时间复杂度：O(n)，每个元素最多入栈和出栈一次
-# 空间复杂度：O(n)，栈存储
+# Time Complexity: O(n), each element pushed and popped at most once
+# Space Complexity: O(n), stack storage

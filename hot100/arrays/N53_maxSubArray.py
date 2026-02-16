@@ -4,13 +4,13 @@
 from typing import List
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        # 动态规划
-        # f(i) 定义为以 nums[i] 结尾的最大子数组和
-        # 计算 f(i) 的时候，我们需要考虑两种情况
-        # 1. 如果 f(i-1) < 0，那么 f(i) = nums[i]
-        # 2. 如果 f(i-1) >= 0，那么 f(i) = f(i-1) + nums[i]
-        # 所以最终返回的就是 max(f(i)) for all i
-        # 时间复杂度是 O(N), 空间复杂度是 O(N) if we don't destroy the original array
+        # Dynamic Programming
+        # f(i) is defined as the max subarray sum ending at nums[i]
+        # When calculating f(i), we consider two cases
+        # 1. If f(i-1) < 0, then f(i) = nums[i]
+        # 2. If f(i-1) >= 0, then f(i) = f(i-1) + nums[i]
+        # So return max(f(i)) for all i
+        # Time complexity is O(N), space complexity is O(N) if we don't destroy the original array
         
         # input: 1 <= nums.length <= 105
 

@@ -1,5 +1,5 @@
-# 矩阵，按行递增，二维查找
-# 数组元素 i, 在矩阵中位置 [i // n][i % n]
+# Matrix, increasing by row, 2D search
+# Array element i, position in matrix [i // n][i % n]
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:

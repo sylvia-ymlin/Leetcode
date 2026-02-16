@@ -1,5 +1,5 @@
-# 右侧能看到的元素
-# 层级遍历，输出每一层的最右侧元素
+# Elements visible from the right side
+# Level order traversal, output the rightmost element of each level
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -17,16 +17,16 @@ class Solution:
         queue = collections.deque([root])
         while queue:
             level = []
-            n = len(queue)  # 当前层的节点数
+            n = len(queue)  # Number of nodes at current level
             for _ in range(n):
                 node = queue.popleft()
                 level.append(node.val)
-                # 将子节点入队列
+                # Add children nodes to queue
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            # 取当前层的最后一个元素作为右侧可见元素
+            # Take the last element of current level as right side visible element
             res.append(level[-1])
 
         return res

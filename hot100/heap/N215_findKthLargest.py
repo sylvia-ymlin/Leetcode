@@ -1,51 +1,51 @@
-# 返回数组中第 k 大的数
-# 构建最大堆，pop k-1 次，返回堆顶元素
+# Return the kth largest element in an array
+# Build a max heap, pop k-1 times, return heap top
 
-# 排序返回第 k 个元素
-# 最优 时间复杂度：O(NlogN)
-# 空间复杂度：O(N)
+# Sort and return kth element
+# Optimal Time Complexity: O(NlogN)
+# Space Complexity: O(N)
 
-# 使用最大堆
-# 最优 时间复杂度：O(N + klogN)， k 是要找的第 k 大元素，因为维护堆的时间复杂度是 O(logN)
-# 空间复杂度：O(N)
+# Use Max Heap
+# Optimal Time Complexity: O(N + klogN), k is the kth largest element to find, because maintaining heap takes O(logN)
+# Space Complexity: O(N)
 
 from random import random
 from typing import List
 import heapq
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        # 使用最大堆
+        # Use Max Heap
         max_heap = []
 
         for num in nums:
-            heapq.heappush(max_heap, -num)  # 将元素入堆，使用负数实现最大堆
+            heapq.heappush(max_heap, -num)  # Push element to heap, use negative number to implement max heap
         
-        # 弹出 k-1 个元素
+        # Pop k-1 elements
         for _ in range(k - 1):
             heapq.heappop(max_heap)
         
-        # 返回堆顶元素，即第 k 大的元素
+        # Return heap top, i.e., kth largest element
         return -max_heap[0]
 
-# 基于快排，期望为线性的选择算法
-# 快排的思想是，每次选择一个 pivot，将数组分为两部分，左半边的数都不大于 pivot，右半边的数都不小于 pivot，我们可以确定 pivot 在排序后的位置
-# 那么我们只需要找到一个 pivot，使得它的位置是 len(nums) - k，而不需要保证划分出的两部分是有序的，将可以将时间复杂度从 O(NlogN) 降低到 O(N)
-# 最优 时间复杂度：O(N)，最坏 O(N^2)
-# 空间复杂度：O(1)
+# Selection algorithm based on Quick Sort, expected linear time
+# Idea of Quick Sort is, choose a pivot each time, partition array into two parts, left part not greater than pivot, right part not smaller than pivot, we can determine position of pivot after sorting
+# So we only need to find a pivot such that its position is len(nums) - k, without ensuring the two partitioned parts are sorted, which can reduce time complexity from O(NlogN) to O(N)
+# Optimal Time Complexity: O(N), Worst Case O(N^2)
+# Space Complexity: O(1)
 
 from typing import List
 
 class Solution2:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         n = len(nums)
-        target = n - k  # 在升序排列中的索引
+        target = n - k  # Index in ascending order
         left, right = 0, n - 1
 
         while left <= right:
             pivot_idx = random.randint(left, right)
             pivot = nums[pivot_idx]
 
-            # 荷兰国旗三路划分
+            # Dutch National Flag partition
             lt, i, gt = left, left, right
             while i <= gt:
                 if nums[i] < pivot:

@@ -1,10 +1,10 @@
-# 搜索旋转数组
-# mid 位置划分数组，两个有且只能有一个有序
+# Search in rotated sorted array
+# mid position divides array, exactly one side is sorted
 # [left, mid]
 # [mid, right]
-# 我们需要判断下一次搜索的上下界
-# 如果 左边有序，mid 是左边最大值
-# 如果右边有序， mid 是右边最小值
+# We need to determine the bounds for next search
+# If left side is sorted, mid is max on left
+# If right side is sorted, mid is min on right
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -16,15 +16,15 @@ class Solution:
             mid = (l + r) // 2
             if nums[mid] == target:
                 return mid
-            if nums[0] <= nums[mid]: # 左边有序
-                if nums[0] <= target < nums[mid]: # 目标值在左
+            if nums[0] <= nums[mid]: # Left side sorted
+                if nums[0] <= target < nums[mid]: # Target on left
                     r = mid - 1
-                else: # 目标值在右
+                else: # Target on right
                     l = mid + 1
-            else: # 右边有序
-                if nums[mid] < target <= nums[len(nums) - 1]: # 目标值在右
+            else: # Right side sorted
+                if nums[mid] < target <= nums[len(nums) - 1]: # Target on right
                     l = mid + 1
-                else: # 目标值在左
+                else: # Target on left
                     r = mid - 1
         return -1
     

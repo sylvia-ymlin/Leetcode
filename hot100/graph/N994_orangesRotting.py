@@ -1,63 +1,63 @@
-# 腐烂的橘子会导致相邻的橘子也腐烂
-# 需要返回腐烂所有橘子所需的分钟数
+# Rotten oranges cause adjacent oranges to rot
+# Need to return minutes required for all oranges to rot
 
-# 暴力解法：给每个新鲜橙子初始化腐烂时间 为 inf
-# 维护一个全局的最小分钟数 inf
-# 枚举每个腐烂的橘子，向四个方向扩散，对相邻的新鲜橘子更新腐烂时间， min(当前时间+1, 新鲜橘子腐烂时间), 更新全局最小分钟数 min（全局最小分钟数, 当前时间+1）
+# Brute force: Initialize rot time for each fresh orange as inf
+# Maintain a global minimum minutes inf
+# Enumerate each rotten orange, spread to four directions, update rot time for adjacent fresh oranges, min(current time + 1, fresh orange rot time), update global minimum minutes min(global minimum minutes, current time + 1)
 
-# 最后检查是否有新鲜橘子未腐烂
-# 如果有，返回 -1，否则返回全局最小分钟数
-# 这种枚举方式时间复杂度 O(MN * (M+N))，空间复杂度 O(MN)，耗时较长
+# Finally check if there are fresh oranges not rotten
+# If yes, return -1, otherwise return global minimum minutes
+# This enumeration time complexity O(MN * (M+N)), space complexity O(MN), takes longer time
 
-# 广度优先搜索
-# 所有的腐烂橘子在广度优先搜索上都是同一层
-# 所以我们第一次遍历，将所有腐烂橘子入队
-# 然后开始 BFS，遍历每个腐烂橘子，向四个方向扩散
-# 如果相邻的新鲜橘子被腐烂，更新其腐烂时间，并入队
-# 每次 BFS 扩散完一层，分钟数加1
-# 当队列为空时，说明所有腐烂橘子都被处理完
-# 最后检查是否有新鲜橘子未腐烂
-# 如果有，返回 -1，否则返回分钟数
+# Breadth First Search
+# All rotten oranges are on same level in BFS
+# So in first traversal, enqueue all rotten oranges
+# Then start BFS, traverse each rotten orange, spread to four directions
+# If adjacent fresh orange rots, update its rot time, and enqueue
+# Each time BFS finishes a layer, minutes + 1
+# When queue empty, means all rotten oranges processed
+# Finally check if there are fresh oranges not rotten
+# If yes, return -1, otherwise return minutes
 
 from typing import List
 import collections
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        # 初始化队列
+        # Initialize queue
         queue = collections.deque()
 
         rows, cols = len(grid), len(grid[0])
 
-        # 第一次遍历，将所有腐烂橘子入队
+        # First traversal, enqueue all rotten oranges
         for r in range(rows):
             for c in range(cols):
-                if grid[r][c] == 2:  # 腐烂的橘子
-                    queue.append((r, c, 0)) # (行, 列, 当前分钟数)
-                    # 我们需要标记节点被腐烂时间
+                if grid[r][c] == 2:  # Rotten orange
+                    queue.append((r, c, 0)) # (row, col, current minutes)
+                    # We need to mark node rot time
 
         def neighbors(r, c):
-            # 返回四个方向的相邻坐标
+            # Return adjacent coordinates in four directions
             for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
                 nr, nc = r + dr, c + dc
                 if 0 <= nr < rows and 0 <= nc < cols:
                     yield nr, nc
 
         minutes = 0
-        # 广度优先搜索
+        # Breadth First Search
         while queue:
-            r, c, minutes = queue.popleft()  # 出队列，获取当前橘子位置和分钟数
+            r, c, minutes = queue.popleft()  # Dequeue, get current orange position and minutes
             for nr, nc in neighbors(r, c):
-                if grid[nr][nc] == 1:  # 新鲜橘子
-                    grid[nr][nc] = 2  # 标记为腐烂
-                    queue.append((nr, nc, minutes + 1))  # 入队列，分钟数加1
+                if grid[nr][nc] == 1:  # Fresh orange
+                    grid[nr][nc] = 2  # Mark as rotten
+                    queue.append((nr, nc, minutes + 1))  # Enqueue, minutes + 1
         
-        # 收尾检查
+        # Final check
         for r in range(rows):
             for c in range(cols):
-                if grid[r][c] == 1:  # 如果还有新鲜橘子未腐烂
+                if grid[r][c] == 1:  # If fresh orange remains
                     return -1
                 
-        return minutes  # 返回总分钟数
+        return minutes  # Return total minutes
 
             
         

@@ -1,24 +1,24 @@
 # unsorted array, find the first missing positive integer
-# rquire a linear time complexity O(N) and constant space complexity O(1)
+# require a linear time complexity O(N) and constant space complexity O(1)
 
 from typing import List
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         n = len(nums)
         
-        # 步骤1：将所有无效数字(<=0 或 >n)替换为 n+1
+        # Step 1: Replace all invalid numbers (<=0 or >n) with n+1
         for i in range(n):
-            if nums[i] <= 0 or nums[i] > n:  # 修正：加上 >n 的情况
+            if nums[i] <= 0 or nums[i] > n:  # Correct: add >n condition
                 nums[i] = n + 1
         
-        # 步骤2：使用数组索引标记数字的存在
-        # 对于数字 x，将 nums[x-1] 标记为负数
+        # Step 2: Use array index to mark presence of numbers
+        # For number x, mark nums[x-1] as negative
         for i in range(n):
-            num = abs(nums[i])  # 使用abs()获取原始值，因为可能已被标记为负数
-            if num <= n:  # 只处理范围内的数字
-                nums[num - 1] = -abs(nums[num - 1])  # 标记为负数，避免重复标记
+            num = abs(nums[i])  # Use abs() to get original value, as it might be marked negative
+            if num <= n:  # Only handle numbers within range
+                nums[num - 1] = -abs(nums[num - 1])  # Mark as negative, avoid double marking
         
-        # 步骤3：找到第一个正数的位置
+        # Step 3: Find the first positive number position
         for i in range(n):
             if nums[i] > 0:
                 return i + 1

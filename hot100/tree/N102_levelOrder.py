@@ -1,9 +1,9 @@
-# 层级遍历
-# 需要用到队列
-# 根节点入队列
-# 队列头出队列，访问节点，所有孩子节点入队列
-# until 队列空
-# 注意输出要按层
+# Level order traversal
+# Need to use a queue
+# Root node enters queue
+# Queue head leaves queue, visit node, all children nodes enter queue
+# until queue is empty
+# Note output should be by level
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -19,15 +19,15 @@ class Solution:
             return []
        
         res = []
-        queue = collections.deque([root])  # 使用双端队列作为队列，最优选择
+        queue = collections.deque([root])  # Use deque as queue, optimal choice
         while queue:
-            level = [] # 当前层的节点值列表
-            # 当前层的节点数就是队列长度
-            n = len(queue) # 在循环中会动态变化，不能直接放到 for 循环中
+            level = [] # List of node values at current level
+            # Number of nodes at current level is queue length
+            n = len(queue) # Will change dynamically in loop, cannot be put directly into for loop
             for _ in range(n):
-                node = queue.popleft() # 队列头出队列
-                level.append(node.val) # 访问节点
-                # 将子节点入队列
+                node = queue.popleft() # Queue head leaves queue
+                level.append(node.val) # Visit node
+                # Children nodes enter queue
                 if node.left:
                     queue.append(node.left)
                 if node.right:

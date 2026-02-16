@@ -1,4 +1,4 @@
-# 深拷贝链表，要求创建新的结点
+# Deep copy a linked list, requiring creation of new nodes
 class Node:
     def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
         self.val = int(x)
@@ -9,16 +9,16 @@ from typing import Optional
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
 
-        # 难点是判断节点是否已经存在
+        # The difficulty is to judge whether the node already exists
         # use a dict to store the relation between the old list and the new list
         mp = {}
         cur = head
-        # 复制节点，建立映射
+        # Copy nodes, build mapping
         while cur:
             mp[cur] = Node(cur.val)
             cur = cur.next
 
-        # 链接节点
+        # Link nodes
         cur = head
         while cur:
             mp[cur].next = mp.get(cur.next) # return null if don't exist
@@ -28,11 +28,11 @@ class Solution:
 
         return mp.get(head)
 
-# 时间复杂度: 两轮遍历 O(N)
-# 空间复杂度：使用字典存储映射关系 O(N)
+# Time Complexity: Two traversals O(N)
+# Space Complexity: Use dictionary to store mapping O(N)
 
-# 优化空间复杂度，拼接 + 拆分
-# 三轮遍历链表
+# Optimize Space Complexity, splicing + splitting
+# Three traversals of the linked list
 
 class Solution2:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
@@ -40,7 +40,7 @@ class Solution2:
 
         cur = head
 
-        # 先复制结点, 并构建拼接链表
+        # First copy nodes, and build spliced linked list
         # old -> new -> old -> new -> ... -> old -> new -> null
         # then we can find the corresponding node use old.next
         while cur:
@@ -49,7 +49,7 @@ class Solution2:
             cur.next = temp
             cur = temp.next
         
-        # 构建新节点的 random 指向
+        # Build random pointers for new nodes
         cur = head
         while cur:
             if cur.random:
@@ -58,7 +58,7 @@ class Solution2:
             # next old node
             cur = cur.next.next
         
-        # 拆分链表
+        # Split linked list
         cur = res = head.next
         pre = head
 
@@ -69,6 +69,6 @@ class Solution2:
             pre = pre.next
             cur = cur.next
         
-        pre.next = None # 处理原链表尾节点
+        pre.next = None # Handle the tail node of the original linked list
 
         return res

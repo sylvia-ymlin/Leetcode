@@ -1,48 +1,48 @@
-# 搜索单词是否存在
-# 当前字母加入路径
-# 递归处理下一个字母
-# 撤销选择
+# Search if word exists
+# Add current letter to path
+# Recursively process next letter
+# Undo choice
 
 from typing import List
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         
-        # 决策集合
-        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # 右，下，左，上
+        # Decision set
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Right, Down, Left, Up
 
-        # (x,y) 当前位置
-        # index 当前处理的字母索引
+        # (x,y) current position
+        # index current letter index
         def backtrack(x, y, index = 0):
             
-            if board[x][y] != word[index]:  # 当前字母不匹配
+            if board[x][y] != word[index]:  # Current letter mismatch
                 return False
             
-            # 如果已经匹配完所有字母
+            # If all letters matched
             if index == len(word) - 1:
                 return True
             
-            # 递归处理下一个字母
-            visited.add((x, y))  # 标记当前位置已访问
+            # Recursively process next letter
+            visited.add((x, y))  # Mark current position as visited
             exist = False
-            for dx, dy in directions:  # 四个方向
-                # 输入判断
-                nx, ny = x + dx, y + dy  # 新位置
+            for dx, dy in directions:  # Four directions
+                # Input check
+                nx, ny = x + dx, y + dy  # New position
                 if 0 <= nx < len(board) and 0 <= ny < len(board[0]) and (nx, ny) not in visited:
-                    if backtrack(nx, ny, index + 1):  # 递归处理下一个字母
+                    if backtrack(nx, ny, index + 1):  # Recursively process next letter
                         exist = True
                         break
                 
-            visited.remove((x, y))  # 撤销选择
+            visited.remove((x, y))  # Undo choice
             return exist
         
-        # 遍历过的点不再访问
+        # Do not visit visited points again
         visited = set()
         for i in range(len(board)):
             for j in range(len(board[0])):
                 if backtrack(i, j):
-                    return True  # 找到匹配路径
+                    return True  # Found matching path
                 
-        return False  # 所有起点都没找到匹配的路径
+        return False  # All starting points failed to find matching path
 
-# 时间复杂度： O(M * N * 3^L)，其中 M 和 N 分别是矩阵的行数和列数，L 是单词长度。3 是因为从 a -> b，探寻过的路径不再访问， 只有 3 个方向可以继续探索。
-# 空间复杂度： O(max(MN, L)), MN 是 visited 集合的大小，L 是递归栈的深度。
+# Time complexity: O(M * N * 3^L), where M and N are rows and cols of matrix, L is word length. 3 because from a -> b, visited path not visited again, only 3 directions to explore.
+# Space complexity: O(max(MN, L)), MN is size of visited set, L is recursion stack depth.

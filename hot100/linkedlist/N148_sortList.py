@@ -1,7 +1,7 @@
-# 链表排序
-# 递归、归并排序
-# 时间复杂度 O(nlogn)
-# 空间复杂度 O(logn) -> 递归栈调用
+# Linked List Sort
+# Recursion, Merge Sort
+# Time Complexity O(nlogn)
+# Space Complexity O(logn) -> Recursive stack call
 
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -11,13 +11,13 @@ class ListNode:
 from typing import Optional
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # 拆分 + 排序
+        # Split + Sort
         # don't include tail
         def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
-            if not head: # 空
+            if not head: # Empty
                  return head
              
-            if head.next == tail: # 单个节点
+            if head.next == tail: # Single node
                  head.next = None
                  return head
 
@@ -34,7 +34,7 @@ class Solution:
             return merge(sortFunc(head, mid), sortFunc(mid, tail))
 
         def merge(head1: ListNode, head2: ListNode) -> ListNode:
-            # 合并两个有序链表
+            # Merge two sorted linked lists
             dummy = ListNode(0)
             temp, temp1, temp2 = dummy, head1, head2
             while temp1 and temp2:
@@ -53,4 +53,4 @@ class Solution:
 
             return dummy.next
 
-        return sorted(head, None)
+        return sortFunc(head, None)

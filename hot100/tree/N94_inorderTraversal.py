@@ -7,7 +7,7 @@ class TreeNode:
 
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        # 中序遍历二叉树, 递归
+        # Inorder traversal of binary tree, recursion
         def inorder(node: Optional[TreeNode], res: List[int]):
             if not node:
                 return
@@ -19,22 +19,22 @@ class Solution:
         inorder(root, result)
         return result
 
-# 非递归实现
+# Iterative implementation
 class SolutionIterative:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         stack, result = [], []
         current = root
 
         while current or stack:
-            # 先遍历到最左边
+            # Traverse to the leftmost
             while current:
                 stack.append(current)
                 current = current.left
 
-            # 出栈并访问节点，parent 先入栈，所以是中序
+            # Pop and visit node, parent pushed first, so it is inorder
             current = stack.pop()
             result.append(current.val)
-            # 转向右子树
+            # Turn to right subtree
             current = current.right
 
         return result

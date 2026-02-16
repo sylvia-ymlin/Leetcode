@@ -1,37 +1,37 @@
-# 编辑距离
-# 其实四个操作
-# 0，什么也不做
-# 1，删除一个字符
-# 2，插入一个字符
-# 3，替换一个字符
+# Edit Distance
+# Actually four operations
+# 0, do nothing
+# 1, delete a character
+# 2, insert a character
+# 3, replace a character
 
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
-        # 动态规划求解编辑距离
-        # dp[i][j] 表示 word1[0:i] 和 word2[0:j] 的编辑距离
+        # Dynamic programming to solve edit distance
+        # dp[i][j] represents edit distance between word1[0:i] and word2[0:j]
         m, n = len(word1), len(word2)
-        # 其中一个字符串为空字符串时，编辑距离为另一个字符串的长度
+        # When one string is empty, edit distance is length of the other string
         if n * m == 0:
             return n + m
         
-        # 动态规划状态转移方程：i -> j
+        # Dynamic programming state transition equation: i -> j
         # if word1[i-1] == word2[j-1]:
         #     dp[i][j] = dp[i-1][j-1]
         # else:
         #     dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1
-        # 替换操作：dp[i-1][j-1] + 1
-        # 删除操作：dp[i-1][j] + 1
-        # 插入操作：dp[i][j-1] + 1
+        # Replace operation: dp[i-1][j-1] + 1
+        # Delete operation: dp[i-1][j] + 1
+        # Insert operation: dp[i][j-1] + 1
 
         dp = [[0] * (n + 1) for _ in range(m + 1)]
 
-        # 第一行和第一列的初始化
+        # Initialize first row and first column
         for i in range(m + 1):
-            dp[i][0] = i  # word1[0:i] 到空字符串的编辑距离为 i
+            dp[i][0] = i  # Edit distance from word1[0:i] to empty string is i
         for j in range(n + 1):
-            dp[0][j] = j  # 空字符串到 word2[0:j] 的编辑距离为 j
+            dp[0][j] = j  # Edit distance from empty string to word2[0:j] is j
 
-        # 填充 dp 数组
+        # Fill dp array
         for i in range(1, m + 1):
             for j in range(1, n + 1):
                 if word1[i - 1] == word2[j - 1]:

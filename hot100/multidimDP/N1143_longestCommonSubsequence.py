@@ -1,13 +1,13 @@
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        # 公共子序列的定义：
-        # 删除若干个字符（也可以不删除）后，剩下的字符在原字符串中的相对位置不变
-        # 例如 "ace" 是 "abcde" 的一个子序列
-        # "aec" 不是 "abcde" 的一个子序列，因为 'e' 在 'c' 之后‘
-        # 所以是找 text1 和 text2 中有多少个相同的字符，且这些字符在两个字符串中的相对位置是一样的
+        # Definition of Common Subsequence:
+        # A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+        # For example, "ace" is a subsequence of "abcde".
+        # "aec" is not a subsequence of "abcde", because 'e' comes after 'c'.
+        # So we need to find how many characters are the same in text1 and text2, and their relative order is the same.
 
-        # 那么对于 
-        # dp[i][j] 表示 text1[0:i] 和 text2[0:j] 的最长公共子序列长度
+        # So for:
+        # dp[i][j] represents the length of the longest common subsequence of text1[0:i] and text2[0:j]
         # if text1[i-1] == text2[j-1]:
         #     dp[i][j] = dp[i-1][j-1] + 1
         # else:

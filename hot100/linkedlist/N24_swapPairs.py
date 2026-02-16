@@ -15,7 +15,7 @@ class Solution:
             # pre -> A -> B
             A = cur
             B = cur.next
-            # 交换 A 和 B
+            # Swap A and B
             # pre -> B -> A
             pre.next = B
             A.next = B.next

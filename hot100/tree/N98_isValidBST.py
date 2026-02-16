@@ -1,5 +1,5 @@
-# 验证二叉搜索树，左子树结点严格小于根结点，右子树结点严格大于根结点
-# 中序遍历，元素值是否递增
+# Validate Binary Search Tree, left subtree nodes strictly less than root node, right subtree nodes strictly greater than root node
+# Inorder traversal, whether element values are increasing
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -15,17 +15,17 @@ class Solution:
             if not node:
                 return True
             
-            # 先递归左子树
+            # Recursively left subtree first
             if not inorder(node.left):
                 return False
                 
-            # 检查当前节点值是否大于前一个值
+            # Check if current node value is greater than previous value
             if node.val <= self.prev:
                 return False
-            self.prev = node.val  # 更新前一个值
+            self.prev = node.val  # Update previous value
             
-            # 最后递归右子树
+            # Finally recursively right subtree
             return inorder(node.right)
         
-        self.prev = float('-inf')  # 用实例变量保存前一个值
+        self.prev = float('-inf')  # Use instance variable to save previous value
         return inorder(root)

@@ -1,4 +1,4 @@
-# 二分查找插入位置
+# Binary search insert position
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         left, right = 0, len(nums) - 1

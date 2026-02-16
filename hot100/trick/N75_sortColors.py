@@ -1,4 +1,4 @@
-# 只有三个数的原地排序
+# Sort three colors in-place
 
 from typing import List
 class Solution:
@@ -14,12 +14,12 @@ class Solution:
                 nums[i], nums[ptr] = nums[ptr], nums[i]
                 ptr += 1
 
-# 一次遍历，两个指针，p0 交换 0， p1 交换 1
-class Solution:
+# One traversal, two pointers, p0 swaps 0, p1 swaps 1
+class Solution2:
     def sortColors(self, nums: List[int]) -> None:
         n = len(nums)
-        # p0 维护后一个0应该插入的位置
-        # p1 维护后一个1应该插入的位置
+        # p0 maintains position where next 0 should be inserted
+        # p1 maintains position where next 1 should be inserted
         p0 = p1 = 0
         for i in range(n):
             if nums[i] == 1:
@@ -27,12 +27,12 @@ class Solution:
                 p1 += 1
             elif nums[i] == 0:
                 nums[i], nums[p0] = nums[p0], nums[i]
-                # 交换 ‘0’ 时，if p0 < p1, 说明交换了 ‘1’ 到 i
+                # When swapping '0', if p0 < p1, means '1' was swapped to i
                 if p0 < p1:
-                    # 把交换出的 1 放到正确位置
+                    # Put swapped 1 back to correct position
                     nums[i], nums[p1] = nums[p1], nums[i]
                 p0 += 1
-                # 如果 0 后还没有 1， 插入一个 0， 仍然需要把 p1 后移
-                # 如果 0 后有 1， 上一个 if 插入了一个新 1，需要 p1 后移
+                # If no 1 after 0, insert a 0, still need to move p1 forward
+                # If 1 after 0, previous if inserted a new 1, need to move p1 forward
                 p1 += 1
         

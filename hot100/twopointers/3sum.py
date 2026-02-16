@@ -1,3 +1,4 @@
+from typing import List
 # find all three number triples that sums up to 0
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:

@@ -11,10 +11,10 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        # 按先序遍历的顺序展开
+        # Flatten in preorder traversal order
         preorderList = list()
 
-        # 先序遍历，将所有节点按先序顺序存入列表
+        # Preorder traversal, store all nodes in list in preorder
         def preorder(node: Optional[TreeNode]) -> None:
             if node:
                 preorderList.append(node)
@@ -22,12 +22,12 @@ class Solution:
                 preorder(node.right)
         
         preorder(root)
-        # 连接所有节点
+        # Connect all nodes
         for i in range(len(preorderList) - 1):
             preorderList[i].left = None
             preorderList[i].right = preorderList[i + 1]
 
-# 原地交换，空间复杂度 O(1)
+# In-place exchange, space complexity O(1)
 class Solution2:
     def flatten(self, root: Optional[TreeNode]) -> None:
         """
@@ -35,29 +35,29 @@ class Solution2:
         """
         cur = root
         while cur:
-            # 当前树的左孩子
+            # Left child of current tree
             temp = cur.left
-            # 左子树不为空，右子树接到左子树的最右节点
+            # If left subtree is not empty, connect right subtree to the rightmost node of left subtree
             while temp and temp.right:
-                # 找到左子树最右节点
+                # Find the rightmost node of left subtree
                 temp = temp.right
 
-            # 存在最右节点
+            # Rightmost node exists
             if temp:
-                # 右子树接到左子树最右节点
+                # Connect right subtree to rightmost node of left subtree
                 temp.right = cur.right
-                # 左子树变成右子树
+                # Left subtree becomes right subtree
                 cur.right = cur.left
-                # 左子树置空
+                # Set left subtree to empty
                 cur.left = None
-            # 继续处理右子树
+            # Continue processing right subtree
             cur = cur.right
 
-# 每一个结点，cur，如果存在左子树，就需要处理
-# 1. 找到左子树的最右节点
-# 2. 将右子树接到左子树的最右节点
-# 3. 将左子树变成右子树
-# 4. 左子树置空
-# 5. 继续处理右子树
-# 时间复杂度 O(n)，空间复杂度 O(1)
-# 根节点 -> 左子树 -> 右子树： 保证先序遍历顺序
+# For each node cur, if left subtree exists, need to process
+# 1. Find the rightmost node of the left subtree
+# 2. Connect the right subtree to the rightmost node of the left subtree
+# 3. Left subtree becomes right subtree
+# 4. Set left subtree to empty
+# 5. Continue processing right subtree
+# Time complexity O(n), Space complexity O(1)
+# Root -> Left Subtree -> Right Subtree: Ensure preorder traversal order

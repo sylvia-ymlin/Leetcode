@@ -1,5 +1,4 @@
-# 前缀树
-
+# Trie
 
 class Trie:
 
@@ -11,9 +10,9 @@ class Trie:
         node = self
         for ch in prefix:
             ch = ord(ch) - ord("a")
-            if not node.children[ch]: # 不存在
+            if not node.children[ch]: # Does not exist
                 return None
-            # 存在，继续
+            # Exists, continue
             node = node.children[ch]
         return node
 
@@ -22,21 +21,21 @@ class Trie:
         for ch in word:
             ch = ord(ch) - ord("a")
             if not node.children[ch]:
-                # 不存在，创建
+                # Does not exist, create
                 node.children[ch] = Trie()
-            # 向下移动
+            # Move down
             node = node.children[ch]
-        # 标记
+        # Mark
         node.isEnd = True
 
     def search(self, word: str) -> bool:
         node = self.searchPrefix(word)
 
-        return node is not None and node.isEnd # 前缀存在，且是完整字符串
+        return node is not None and node.isEnd # Prefix exists, and is a complete string
         
 
     def startsWith(self, prefix: str) -> bool:
-        # 前缀存在即可
+        # Prefix exists is enough
         node = self.searchPrefix(prefix)
         return node is not None
 
@@ -46,6 +45,6 @@ class Trie:
 # param_2 = obj.search(word)
 # param_3 = obj.startsWith(prefix)
 
-# 每个节点包含
-# 指向子节点的指针数组，对本题而言，长度 26，每个元素对应一个字母
-# 布尔字段 isEnd，表示该节点是否是字符串结尾
+# Each node contains
+# Array of pointers to child nodes, length 26 for this problem, each element corresponds to a letter
+# Boolean field isEnd, indicating if this node is end of string

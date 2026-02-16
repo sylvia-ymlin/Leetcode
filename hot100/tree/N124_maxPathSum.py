@@ -8,26 +8,26 @@ class TreeNode:
 from typing import Optional
 class Solution:
     def __init__(self):
-        self.maxSum = float('-inf')  # 初始化最大路径和为负无穷
+        self.maxSum = float('-inf')  # Initialize max path sum to negative infinity
 
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        # 找到以每个节点为根的最大路径和
+        # Find max path sum rooted at each node
         def dfs(node: Optional[TreeNode]) -> int:
             if not node:
                 return 0
             
-            # 递归计算左子树和右子树的最大路径和
-            # 非负才能贡献到路径和
+            # Recursively calculate max path sum of left and right subtrees
+            # Only non-negative can contribute to path sum
             left = max(dfs(node.left), 0)
             right = max(dfs(node.right), 0)
 
-            # 当前节点的最大路径和
+            # Max path sum of current node
             current_sum = node.val + left + right
 
-            # 更新全局最大路径和 
+            # Update global max path sum
             self.maxSum = max(self.maxSum, current_sum)
 
-            # 返回当前节点的最大贡献值: 构成路径，在该节点只能单向
+            # Return max contribution of current node: forming path, can only be unidirectional at this node
             return node.val + max(left, right)
         
         dfs(root)

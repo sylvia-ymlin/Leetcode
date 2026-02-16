@@ -1,4 +1,4 @@
-# 乘积最大非空连续数组
+# Max product of non-empty continuous subarray
 from typing import List
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
@@ -9,7 +9,7 @@ class Solution:
             # if 0, all will be zero
             # if num > 0, max(nums[i],dp_max[i-1]*nums[i])
             # if num < 0, min(nums[i],dp_min[i-1]*nums[i])
-            # 可以合并
+            # Can be merged
             dp_max[i] = max(dp_min[i-1]*nums[i],nums[i],dp_max[i-1]*nums[i])
             dp_min[i] = min(dp_min[i-1]*nums[i],nums[i],dp_max[i-1]*nums[i])
         return max(dp_max)

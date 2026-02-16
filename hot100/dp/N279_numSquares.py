@@ -1,8 +1,8 @@
 class Solution:
     def numSquares(self, n: int) -> int:
-        # f[i] 表示和为 i 的完全平方数的最少数量
-        # 枚举，would be [1, ... , sqrt(i)]
-        # 状态转移方程
+        # f[i] represents the least number of perfect square numbers that sum to i
+        # Enumeration, would be [1, ... , sqrt(i)]
+        # State transition equation
         # f[i] = min(f[i - j * j]) + 1, 
         # where j> 0 and  j * j <= i
 

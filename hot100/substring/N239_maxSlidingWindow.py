@@ -10,7 +10,7 @@ from collections import deque
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         res = []
-        q = deque() # 双端队列，存储当前窗口的最大值的索引
+        q = deque() # Deque, stores the indices of max elements in current window
 
         l = r = 0
 

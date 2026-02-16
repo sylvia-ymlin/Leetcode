@@ -2,12 +2,12 @@ from typing import List
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        # 不能偷窃相同的房屋
-        # dp[i] 表示偷窃到第 i 个房屋的最大金额
-        # 状态转移方程
-        # 如果当前房子偷窃： dp[i] = dp[i-2] + nums[i]
-        # 如果当前房子不偷窃： dp[i] = dp[i-1]
-        # 取两者的最大值： dp[i] = max(dp[i-1], dp[i-2] + nums[i]) -> i >= 2
+        # Cannot rob adjacent houses
+        # dp[i] represents the max money robbed up to the i-th house
+        # State transition equation
+        # If rob current house: dp[i] = dp[i-2] + nums[i]
+        # If not rob current house: dp[i] = dp[i-1]
+        # Take max of both: dp[i] = max(dp[i-1], dp[i-2] + nums[i]) -> i >= 2
 
         dp = [0] * len(nums)
         for i in range(0, len(nums)):

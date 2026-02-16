@@ -1,12 +1,12 @@
-# 动态规划求解最长回文子串
+# Dynamic programming to solve longest palindrome substring
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         n = len(s)
         if n < 2:
             return s
         
-        # dp[i][j] 表示 s[i:j+1] 是否是回文串
-        # 状态转移方程：
+        # dp[i][j] represents whether s[i:j+1] is a palindrome substring
+        # State transition equation:
         # dp[i][j] = dp[i+1, j-1] and s[i] == s[j]
 
         dp = [[False] * n for _ in range(n)]
@@ -15,7 +15,7 @@ class Solution:
         for j in range(n):
             for i in range(j + 1):
                 if s[i] == s[j]:
-                    if j - i <= 2:  # 长度为1或2的回文串
+                    if j - i <= 2:  # Palindrome of length 1 or 2
                         dp[i][j] = True
                     else:
                         dp[i][j] = dp[i + 1][j - 1]
@@ -24,9 +24,9 @@ class Solution:
                         max_length = j - i + 1
                         start, end = i, j
         
-        return s[start:end + 1]  # 返回最长回文子串
+        return s[start:end + 1]  # Return longest palindrome substring
 
-# 优化空间复杂度为 O(n)
+# Optimized space complexity to O(n)
 class Solution2:
     def longestPalindrome(self, s: str) -> str:
         n = len(s)
@@ -34,18 +34,18 @@ class Solution2:
             return s
 
         # dp[i][j] =  dp[i+1, j-1] and s[i] == s[j]
-        # 只需要一维数组来存储当前行的状态, 优化为
-        # dp[i] 表示 s[i:j-1] 是否是回文串，代表上一行的状态
+        # Only need one-dimensional array to store current row state, optimize to
+        # dp[i] represents whether s[i:j-1] is a palindrome, representing previous row state
 
         dp = [True] * n
         start, end, max_length = 0, 0, 1
         
         for j in range(n):
-            for i in range(j + 1): # j 在这个循环中是固定的
-                # 单个字符是回文串
+            for i in range(j + 1): # j is fixed in this loop
+                # Single character is palindrome
                 if i == j:
                     dp[i] = True # dp[i][j] = True
-                # 长度 2 的字符串
+                # String of length 2
                 elif j - i == 1:
                     dp[i] = (s[i] == s[j])
                 else:
@@ -57,7 +57,7 @@ class Solution2:
                     max_length = j - i + 1
                     start, end = i, j
 
-        return s[start:end + 1]  # 返回最长回文子串
+        return s[start:end + 1]  # Return longest palindrome substring
 
 
 s = "babad"

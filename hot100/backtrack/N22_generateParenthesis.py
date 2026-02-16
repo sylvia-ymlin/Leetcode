@@ -1,7 +1,7 @@
-# 生成括号
-# 左右括号要匹配
-# 统计左括号和右括号的数量
-# 右括号数量不能大于左括号数量
+# Generate Parentheses
+# Left and correct parentheses must match
+# Count number of left and right parentheses
+# Number of right parentheses cannot be greater than number of left parentheses
 
 from typing import List
 class Solution:
@@ -9,20 +9,20 @@ class Solution:
         res = []
 
         def backtrack(left=0, right=0, path=[]):
-            # 生成了一个合法的括号组合，添加然后 return
+            # Generated a valid parenthesis combination, add and return
             if left == n and right == n:
-                res.append("".join(path)) # 将列表转换为字符串
+                res.append("".join(path)) # Convert list to string
                 return
             
-            if left < n:  # 左括号可以添加
-                path.append("(")  # 添加左括号
+            if left < n:  # Can add left parenthesis
+                path.append("(")  # Add left parenthesis
                 backtrack(left + 1, right, path)
-                path.pop()  # 撤销选择
+                path.pop()  # Undo choice
 
-            if right < left:  # 右括号可以添加
-                path.append(")")  # 添加右括号
+            if right < left:  # Can add right parenthesis
+                path.append(")")  # Add right parenthesis
                 backtrack(left, right + 1, path)
-                path.pop()  # 撤销选择
+                path.pop()  # Undo choice
         
         backtrack()
         return res

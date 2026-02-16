@@ -1,6 +1,6 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        # 同样是一个排列问题
+        # Also a permutation problem
         # 2 - 9
         # 2: "abc"
         # 3: "def"
@@ -11,9 +11,9 @@ class Solution:
         # 8: "tuv"
         # 9: "wxyz"
 
-        # 每个按键有三种（或 9 对应四种）选择
+        # Each key has three (or 9 corresponds to four) choices
 
-        # 数组长度可能为 0
+        # Array length may be 0
         if len(digits) == 0:
             return []
         
@@ -29,21 +29,21 @@ class Solution:
         }
 
         def backtrack(index=0, path=""):
-            # 如果当前路径的长度等于 digits 长度，说明找到一个可行解
+            # If current path length equals digits length, a feasible solution is found
             if len(path) == len(digits):
                 res.append(path)
                 return
             
-            # 取当前数字对应的字母
+            # Get letters corresponding to current digit
             possible_letters = phone_map[digits[index]]
             for letter in possible_letters:
-                # 做选择
+                # Make choices
                 path += letter
 
-                # 递归处理下一个数字
+                # Recursively process next digit
                 backtrack(index + 1, path)
                 
-                # 撤销选择
+                # Undo choice
                 path = path[:-1]
         
         res = []

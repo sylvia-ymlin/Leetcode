@@ -1,12 +1,12 @@
 
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
-        # dp[i]: 以下标 i 字符结尾的最长有效括号的长度
-        # 有效字符串一定以 ')' 结尾
+        # dp[i]: length of longest valid parentheses ending at index i
+        # Valid string must end with ')'
         # s[i] == ')' -> s[i-1] == '(' -> dp[i] = dp[i-2] + 2
-        # s[i] == ')' -> s[i-1] == ')' ，我们可以知道 s[i - dp[i-1]] = '(', 则 我们需要 s[i - dp[i-1]-1] = '('
+        # s[i] == ')' -> s[i-1] == ')', we know s[i - dp[i-1]] = '(', so we need s[i - dp[i-1]-1] = '('
 
-        # 有效括号：左括号总先于右括号出现
+        # Valid parentheses: left parenthesis always appears before right parenthesis
         if not s:
             return 0
         

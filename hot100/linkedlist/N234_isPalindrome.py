@@ -1,4 +1,4 @@
-# 回文链表一定对称
+# Palindrome linked list must be symmetric
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -7,28 +7,28 @@ class ListNode:
 from typing import Optional
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        # 快慢指针找到中点
-        # 题目没有要求不能修改链表，所以可以反转链表
-        # 然后比较前半部分和后半部分是否相等
+        # Fast and slow pointers to find midpoint
+        # Question does not forbid modifying linked list, so we can reverse linked list
+        # Then compare first half and second half
 
-        # 空节点或单个节点
+        # Empty node or single node
         if not head or not head.next:
             return True
-        # 快慢指针找到中间节点，同时翻转前半部分链表
+        # Fast and slow pointers to find middle node, while reversing first half linked list
         slow = fast = head
         pre = None
         while fast and fast.next:
-            # 快指针移动
+            # Fast pointer moves
             fast = fast.next.next
-            # 慢指针移动和翻转链表
+            # Slow pointer moves and reverses linked list
             next_slow = slow.next
             slow.next = pre
             pre = slow
             slow = next_slow
 
-        # 此时 pre 指向前半段节点
-        if fast:  # 奇数个节点，slow 在中间节点
-            slow = slow.next  # 跳过中间节点
+        # Now pre points to first half nodes
+        if fast:  # Odd number of nodes, slow is at middle node
+            slow = slow.next  # Skip middle node
 
         while slow:
             if pre.val != slow.val:
